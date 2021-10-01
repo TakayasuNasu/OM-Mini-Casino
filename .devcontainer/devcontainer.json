@@ -1,12 +1,16 @@
 {
-  "name": "boilerplate",
+  "name": "mini-casino",
   "dockerComposeFile": ["../docker-compose.yml"],
   "service": "app",
   "workspaceFolder": "/home/app",
   "extensions": [
     "esbenp.prettier-vscode",
     "oderwat.indent-rainbow",
-    "arjun.swagger-viewer"
+    "arjun.swagger-viewer",
+    "jpoissonnier.vscode-styled-components"
   ],
-  "shutdownAction": "none"
+  "shutdownAction": "none",
+  "mounts": [
+    "source=${localEnv:HOME},target=/home/app/node_modules,type=volume"
+  ]
 }
