@@ -32,10 +32,10 @@ const UL = styled.section`
   }
 `
 
-export const validPassword = (password: string) => {
-  const result = /^(?=.*[A-Z])(?=.*[#%.?/-])[a-zA-Z0-9.?/-]{8,24}$/.test(
-    password
-  )
+export const validPassword = (password: string | undefined) => {
+  if (!password) return false
+  const result =
+    /^(?=.*?[a-z])(?=.*?\d)(?=.*?[!-\/:-@[-`{-~])[!-~]{5,16}$/i.test(password)
   return result
 }
 
@@ -48,9 +48,16 @@ const Signup: FC = () => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
-    console.log(forms.current[0].current)
-    console.log(forms.current[1].current)
-    console.log(forms.current[2].current?.value)
+    const password = forms.current[1].current?.value
+    const repeat = forms.current[2].current?.value
+    if (!validPassword(password)) {
+      alert('invalid password')
+      return
+    }
+    if (password != repeat) {
+      alert('not the same password and repeat password')
+      return
+    }
     console.log(forms.current[3].current?.value)
   }
 
