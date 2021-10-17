@@ -7,6 +7,7 @@ import Modal from 'react-modal'
 import Button from '@mui/material/Button'
 import CasinoIcon from '@mui/icons-material/Casino'
 import Header from '@/components/header'
+import Signup from '@/components/signup'
 
 const Section = styled.section`
   min-height: 100vh;
@@ -64,7 +65,7 @@ const Home: FC = () => {
         isOpen={modalIsOpen}
         onRequestClose={() => setIsOpen(!modalIsOpen)}
       >
-        <p>hh</p>
+        <Signup />
       </Modal>
     </Section>
   )

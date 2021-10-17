@@ -1,5 +1,6 @@
 import { useState, useRef, createRef, ChangeEvent } from 'react'
 import type { FC } from 'react'
+import { format } from 'date-fns'
 import styled from 'styled-components'
 import TextField from '@mui/material/TextField'
 import AdapterDateFns from '@mui/lab/AdapterDateFns'
@@ -39,6 +40,12 @@ export const validPassword = (password: string | undefined) => {
   return result
 }
 
+export const age = (birthdate: string) => {
+  var d1 = new Date(birthdate)
+  var d = new Date()
+  return d.getFullYear() - d1.getFullYear()
+}
+
 const Signup: FC = () => {
   const [value, setValue] = useState<Date | null>(null)
   const [canRegister, setCanRegister] = useState(false)
@@ -50,6 +57,7 @@ const Signup: FC = () => {
     e.preventDefault()
     const password = forms.current[1].current?.value
     const repeat = forms.current[2].current?.value
+    const birthdate = forms.current[3].current?.value
     if (!validPassword(password)) {
       alert('invalid password')
       return
@@ -58,7 +66,13 @@ const Signup: FC = () => {
       alert('not the same password and repeat password')
       return
     }
-    console.log(forms.current[3].current?.value)
+    if (!birthdate) {
+      alert('invalid birth date')
+      return
+    }
+    if (age(birthdate) < 17) {
+      alert('Should be 18 years old.')
+    }
   }
 
   const validName = (e: ChangeEvent<HTMLInputElement>) => {

@@ -1,4 +1,4 @@
-import { validPassword } from '@/components/signup'
+import { validPassword, age } from '@/components/signup'
 
 describe('signup', () => {
   describe('validPassword', () => {
@@ -16,6 +16,15 @@ describe('signup', () => {
       ['A1!23', true],
     ])('valid Password', (a, expected) => {
       expect(validPassword(a)).toBe(expected)
+    })
+  })
+
+  describe('age', () => {
+    test.each([
+      ['10/2/2011', 10],
+      ['10/2/2001', 20],
+    ])('how old', (a, expected) => {
+      expect(age(a)).toBe(expected)
     })
   })
 })
